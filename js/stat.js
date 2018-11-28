@@ -20,6 +20,7 @@ var getMaxElement = function(arr) {
   var maxElement = arr[0];
   
   for (var i = 0; i < arr.length; i++) {
+    
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
@@ -41,7 +42,14 @@ window.renderStatistics = function(ctx, players, times) {
   var maxTime = getMaxElement(times);
   
   for (var i = 0; i < players.length; i++) {
+    ctx.fillStyle = '#000';
     ctx.fillText(players[i], CLOUD_X + GAP, CLOUD_Y + TOP_GAP + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i);
-    ctx.fillRect(CLOUD_X + GAP + TEXT_WIDTH, CLOUD_Y + TOP_GAP + GAP + (GAP + BAR_HEIGHT) * i, (barWidth * times[i]) / maxTime, BAR_HEIGHT);
-  }
+    if (players[i] === 'Вы') {
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+        } else {
+            ctx.fillStyle = 'rgba(0, 0, 255, ' + (Math.random()) + ')';
+        }
+        
+        ctx.fillRect(CLOUD_X + GAP + TEXT_WIDTH, CLOUD_Y + TOP_GAP + GAP + (GAP + BAR_HEIGHT) * i, (barWidth * Math.floor(times[i]) / Math.floor(maxTime)), BAR_HEIGHT);
+    }
 };
